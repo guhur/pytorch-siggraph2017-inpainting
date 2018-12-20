@@ -1,11 +1,11 @@
 import argparse
 import os
 import torch
-from torch.legacy import nn
-from torch.legacy.nn.Sequential import Sequential
+from torch import nn
+from torch.nn import Sequential
 import cv2
 import numpy as np
-from torch.utils.serialization import load_lua
+import torchfile
 import torchvision.utils as vutils
 from utils import *
 from poissonblending import prepare_mask, blend
@@ -24,7 +24,7 @@ print(opt)
 
 
 # load Completion Network
-data = load_lua(opt.model_path)
+data = torchfile.load(opt.model_path)
 model = data.model
 model.evaluate()
 datamean = data.mean
